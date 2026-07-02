@@ -1,0 +1,36 @@
+{
+    "_comment": "场景：vLLM OHTTP 集群中的单个 Egress 节点。通过 netfilter 捕获 8080 端口流量，使用 peer_shared 与集群其他节点共享 OHTTP 私钥，并对内启用双向 RA。",
+    "add_egress": [
+        {
+            "netfilter": {
+                "capture_dst": [
+                    { "port": 8080 }
+                ]
+            },
+            "ohttp": {
+                "key": {
+                    "source": "peer_shared",
+                    "rotation_interval": 300,
+                    "host": "0.0.0.0",
+                    "port": 8301,
+                    "peers": [
+                        "192.168.1.12:8301",
+                        "192.168.1.13:8301"
+                    ],
+                    "attest": {
+                        "aa_addr": "unix:///run/confidential-containers/attestation-agent/attestation-agent.sock"
+                    },
+                    "verify": {
+                        "as_addr": "http://as.example.com:8080/",
+                        "policy_ids": [
+                            "default"
+                        ]
+                    }
+                }
+            },
+            "attest": {
+                "aa_addr": "unix:///run/confidential-containers/attestation-agent/attestation-agent.sock"
+            }
+        }
+    ]
+}

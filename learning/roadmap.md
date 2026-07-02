@@ -69,8 +69,9 @@
 
 ### 输出物
 - 本阶段解读文档：`learning/step-03-transport-protocols.md`
-- RATS-TLS 握手流程图：`learning/images/step-03-rats-tls-handshake.png`
-- OHTTP 消息流程图：`learning/images/step-03-ohttp-flow.png`
+- RATS-TLS 握手流程图：Mermaid `sequenceDiagram`
+- OHTTP 消息流程图：Mermaid `sequenceDiagram`
+- peer_shared 密钥同步图：Mermaid `graph LR`
 
 ---
 
@@ -91,7 +92,12 @@
 
 ### 输出物
 - 本阶段解读文档：`learning/step-04-configuration.md`
-- 至少 3 个可运行的配置示例：`learning/configs/`
+- 5 个场景配置示例：`learning/configs/`
+  - `01-http-proxy-single.json`
+  - `02-vllm-ohttp-cluster-egress.json`
+  - `03-vllm-ohttp-cluster-ingress.json`
+  - `04-mesh-two-way-ra.json`
+  - `05-control-interface-metrics.json`
 
 ---
 
@@ -113,7 +119,7 @@
 
 ### 输出物
 - 本阶段解读文档：`learning/step-05-deployment.md`
-- 部署方式对比图：`learning/images/step-05-deployment-comparison.png`
+- 部署方式对比图：Mermaid `graph LR` / `graph TD`
 
 ---
 

@@ -1,0 +1,32 @@
+{
+    "_comment": "场景：演示控制面 RESTful API 和 OTLP metrics 导出器的配置。日志通过 RUST_LOG 环境变量控制，例如 RUST_LOG=info。可与任意 Ingress/Egress 配置组合使用。",
+    "add_ingress": [
+        {
+            "mapping": {
+                "in": { "host": "127.0.0.1", "port": 10001 },
+                "out": { "host": "127.0.0.1", "port": 20001 }
+            },
+            "verify": {
+                "as_addr": "http://127.0.0.1:8080/",
+                "policy_ids": ["default"]
+            }
+        }
+    ],
+    "control_interface": {
+        "restful": {
+            "host": "0.0.0.0",
+            "port": 8081
+        }
+    },
+    "metric": {
+        "exporters": [
+            {
+                "type": "otlp",
+                "protocol": "http/protobuf",
+                "endpoint": "https://otlp.example.com/url",
+                "headers": { "Authorization": "XXXXXXXXX" },
+                "step": 60
+            }
+        ]
+    }
+}

@@ -1,0 +1,24 @@
+{
+    "_comment": "场景：vLLM OHTTP 集群中的客户端侧 Ingress。作为本地 HTTP 代理，使用 OHTTP 加密请求，并通过 verify 验证服务端 TEE 身份。",
+    "add_ingress": [
+        {
+            "http_proxy": {
+                "proxy_listen": {
+                    "host": "0.0.0.0",
+                    "port": 41000
+                },
+                "dst_filters": {
+                    "domain": "*",
+                    "port": 8080
+                }
+            },
+            "ohttp": {},
+            "verify": {
+                "as_addr": "http://as.example.com:8080/",
+                "policy_ids": [
+                    "default"
+                ]
+            }
+        }
+    ]
+}

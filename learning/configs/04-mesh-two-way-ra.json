@@ -1,0 +1,39 @@
+{
+    "_comment": "场景：Mesh 集群中每个节点同时作为 Ingress 和 Egress，通过 netfilter 捕获 9001 端口流量，并启用双向远程证明。",
+    "add_ingress": [
+        {
+            "netfilter": {
+                "capture_dst": {
+                    "port": 9001
+                }
+            },
+            "attest": {
+                "aa_addr": "unix:///run/confidential-containers/attestation-agent/attestation-agent.sock"
+            },
+            "verify": {
+                "as_addr": "http://127.0.0.1:8080/",
+                "policy_ids": [
+                    "default"
+                ]
+            }
+        }
+    ],
+    "add_egress": [
+        {
+            "netfilter": {
+                "capture_dst": {
+                    "port": 9001
+                }
+            },
+            "attest": {
+                "aa_addr": "unix:///run/confidential-containers/attestation-agent/attestation-agent.sock"
+            },
+            "verify": {
+                "as_addr": "http://127.0.0.1:8080/",
+                "policy_ids": [
+                    "default"
+                ]
+            }
+        }
+    ]
+}
